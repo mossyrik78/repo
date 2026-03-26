@@ -69,11 +69,26 @@ ip dhcp pool DHCP-POOL
  dns-server {{ dhcp_dns }}
 !
 access-list {{ acl_nat }} permit ip {{ acl_nat_network }} any
+access-list {{ acl_extended }} permit ip {{ acl_extended_network }} any
 !
 ip nat inside source list {{ acl_nat }} interface {{ nat_outside }} overload
 interface {{ nat_inside }}
  ip nat inside
 interface {{ nat_outside }}
  ip nat outside
+!
+! TACACS+
+aaa new-model
+tacacs server TACACS-SRV
+ address ipv4 {{ tacacs_server }}
+ key {{ tacacs_key }}
+exit
+aaa group server tacacs+ TACACS-GROUP
+ server name TACACS-SRV
+exit
+aaa authentication login default group TACACS-GROUP local
+aaa authorization exec default group TACACS-GROUP local
+aaa accounting exec default start-stop group TACACS-GROUP
+ip tacacs source-interface {{ tacacs_source_intf }}
 !
 end

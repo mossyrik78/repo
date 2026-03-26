@@ -64,6 +64,11 @@ def index():
             "nat_outside": request.form.get("nat_outside", "GigabitEthernet0/0/0"),
             "acl_nat": request.form.get("acl_nat", "101"),
             "acl_nat_network": request.form.get("acl_nat_network", "10.0.0.0 0.0.0.255"),
+            "acl_extended": request.form.get("acl_extended", "110"),
+            "acl_extended_network": request.form.get("acl_extended_network", "10.0.0.0 0.0.0.255"),
+            "tacacs_server": request.form.get("tacacs_server", "10.0.0.10"),
+            "tacacs_key": request.form.get("tacacs_key", "tacacsSecret"),
+            "tacacs_source_intf": request.form.get("tacacs_source_intf", "GigabitEthernet0/0/1"),
         }
 
         config_text = render_config("template.j2", context)

@@ -139,6 +139,23 @@
         <label for="acl_nat_network">NAT ACL Network</label>
         <input type="text" id="acl_nat_network" name="acl_nat_network" value="10.0.0.0 0.0.0.255" />
 
+        <h3>Access List / Security</h3>
+        <label for="acl_extended">Extended ACL Number</label>
+        <input type="text" id="acl_extended" name="acl_extended" value="110" />
+
+        <label for="acl_extended_network">Extended ACL Network (for permit/deny)</label>
+        <input type="text" id="acl_extended_network" name="acl_extended_network" value="10.0.0.0 0.0.0.255" />
+
+        <h3>TACACS+ Authentication</h3>
+        <label for="tacacs_server">TACACS+ Server IP</label>
+        <input type="text" id="tacacs_server" name="tacacs_server" value="10.0.0.10" />
+
+        <label for="tacacs_key">TACACS+ Shared Secret</label>
+        <input type="password" id="tacacs_key" name="tacacs_key" value="tacacsSecret" />
+
+        <label for="tacacs_source_intf">TACACS+ Source Interface</label>
+        <input type="text" id="tacacs_source_intf" name="tacacs_source_intf" value="GigabitEthernet0/0/1" />
+
         <button type="submit">Generate Config</button>
       </form>
     </div>
