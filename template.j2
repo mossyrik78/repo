@@ -1,5 +1,79 @@
 hostname {{ hostname }}
-interface Vlan1
-  ip address {{ mgmt_ip }} 255.255.255.0
-  no shutdown
-ip route 0.0.0.0 0.0.0.0 {{ gateway }}
+!
+ip domain-name {{ domain_name }}
+no ip domain-lookup
+enable secret {{ enable_secret }}
+username {{ admin_user }} secret {{ admin_password }}
+service password-encryption
+banner motd #{{ banner }}#
+!
+line console 0
+ password {{ console_password }}
+ login
+!
+line vty 0 4
+ password {{ vty_password }}
+ transport input ssh
+ login local
+!
+ip ssh version {{ ssh_version }}
+crypto key generate rsa modulus {{ crypto_key_size }}
+!
+logging host {{ syslog_server }}
+logging trap {{ logging_level }}
+!
+interface {{ int1_id }}
+ description {{ int1_desc }}
+ ip address {{ int1_ip }} {{ int1_mask }}
+ no shutdown
+!
+interface {{ int2_id }}
+ description {{ int2_desc }}
+ ip address {{ int2_ip }} {{ int2_mask }}
+ no shutdown
+!
+interface {{ loopback_id }}
+ ip address {{ loopback_ip }} {{ loopback_mask }}
+!
+ip route {{ default_route }}
+{% if static_routes %}
+{% for route in static_routes.splitlines() %}
+ip route {{ route }}
+{% endfor %}
+{% endif %}
+!
+{% if routing_protocol == 'ospf' %}
+router ospf {{ ospf_process }}
+ router-id {{ router_id }}
+ network {{ int2_ip }} 0.0.0.255 area 0
+ passive-interface {{ passive_interfaces }}
+{% elif routing_protocol == 'eigrp' %}
+router eigrp {{ bgp_as }}
+ network {{ int2_ip }} 0.0.0.0
+ passive-interface {{ passive_interfaces }}
+{% elif routing_protocol == 'bgp' %}
+router bgp {{ bgp_as }}
+ bgp router-id {{ router_id }}
+ neighbor {{ int1_ip }} remote-as {{ bgp_as }}
+{% endif %}
+!
+ip name-server {{ dns1 }}
+ip name-server {{ dns2 }}
+ntp server {{ ntp1 }}
+ntp server {{ ntp2 }}
+!
+ip dhcp excluded-address {{ dhcp_excluded }}
+ip dhcp pool DHCP-POOL
+ network {{ dhcp_network }}
+ default-router {{ dhcp_default_router }}
+ dns-server {{ dhcp_dns }}
+!
+access-list {{ acl_nat }} permit ip {{ acl_nat_network }} any
+!
+ip nat inside source list {{ acl_nat }} interface {{ nat_outside }} overload
+interface {{ nat_inside }}
+ ip nat inside
+interface {{ nat_outside }}
+ ip nat outside
+!
+end

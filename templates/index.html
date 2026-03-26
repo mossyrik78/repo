@@ -16,14 +16,128 @@
     <div class="wrapper">
       <h1>Router Config Builder</h1>
       <form method="post">
+        <h2>1. Administrative & Device Identity</h2>
         <label for="hostname">Hostname</label>
-        <input type="text" id="hostname" name="hostname" required />
+        <input type="text" id="hostname" name="hostname" required value="R1-Edge-London" />
 
-        <label for="mgmt_ip">Management IP</label>
-        <input type="text" id="mgmt_ip" name="mgmt_ip" required placeholder="e.g. 10.0.0.10" />
+        <label for="domain_name">Domain Name</label>
+        <input type="text" id="domain_name" name="domain_name" required value="corp.internal" />
 
-        <label for="gateway">Default Gateway</label>
-        <input type="text" id="gateway" name="gateway" required placeholder="e.g. 10.0.0.1" />
+        <label for="enable_secret">Enable Secret</label>
+        <input type="password" id="enable_secret" name="enable_secret" required />
+
+        <label for="admin_user">Admin User</label>
+        <input type="text" id="admin_user" name="admin_user" required value="admin" />
+
+        <label for="admin_password">Admin Password</label>
+        <input type="password" id="admin_password" name="admin_password" required />
+
+        <label for="banner">Banner</label>
+        <input type="text" id="banner" name="banner" required value="Unauthorized access is prohibited." />
+
+        <h2>2. Management & Security</h2>
+        <label for="console_password">Console Password</label>
+        <input type="password" id="console_password" name="console_password" required value="consPass" />
+
+        <label for="vty_password">VTY Password</label>
+        <input type="password" id="vty_password" name="vty_password" required value="vtyPass" />
+
+        <label for="ssh_version">SSH Version</label>
+        <input type="text" id="ssh_version" name="ssh_version" required value="2" />
+
+        <label for="crypto_key_size">RSA Key Size</label>
+        <input type="number" id="crypto_key_size" name="crypto_key_size" required value="2048" />
+
+        <label for="syslog_server">Syslog Server</label>
+        <input type="text" id="syslog_server" name="syslog_server" required value="10.0.0.5" />
+
+        <label for="logging_level">Logging Level</label>
+        <input type="text" id="logging_level" name="logging_level" required value="informational" />
+
+        <h2>3. Layer 3 (IP) Addressing</h2>
+        <label for="int1_id">Interface 1 ID</label>
+        <input type="text" id="int1_id" name="int1_id" value="GigabitEthernet0/0/0" />
+        <label for="int1_desc">Interface 1 Description</label>
+        <input type="text" id="int1_desc" name="int1_desc" value="WAN / ISP Link" />
+        <label for="int1_ip">Interface 1 IP</label>
+        <input type="text" id="int1_ip" name="int1_ip" value="192.0.2.2" />
+        <label for="int1_mask">Interface 1 Mask</label>
+        <input type="text" id="int1_mask" name="int1_mask" value="255.255.255.252" />
+        <label for="int1_vlan">Interface 1 VLAN</label>
+        <input type="text" id="int1_vlan" name="int1_vlan" />
+
+        <label for="int2_id">Interface 2 ID</label>
+        <input type="text" id="int2_id" name="int2_id" value="GigabitEthernet0/0/1" />
+        <label for="int2_desc">Interface 2 Description</label>
+        <input type="text" id="int2_desc" name="int2_desc" value="LAN / Core Switch" />
+        <label for="int2_ip">Interface 2 IP</label>
+        <input type="text" id="int2_ip" name="int2_ip" value="10.0.0.1" />
+        <label for="int2_mask">Interface 2 Mask</label>
+        <input type="text" id="int2_mask" name="int2_mask" value="255.255.255.0" />
+
+        <label for="loopback_id">Loopback ID</label>
+        <input type="text" id="loopback_id" name="loopback_id" value="Loopback0" />
+        <label for="loopback_ip">Loopback IP</label>
+        <input type="text" id="loopback_ip" name="loopback_ip" value="10.0.0.254" />
+        <label for="loopback_mask">Loopback Mask</label>
+        <input type="text" id="loopback_mask" name="loopback_mask" value="255.255.255.255" />
+
+        <h2>4. Routing & Connectivity</h2>
+        <label for="default_route">Default Route</label>
+        <input type="text" id="default_route" name="default_route" value="0.0.0.0 0.0.0.0 192.0.2.1" />
+
+        <label for="static_routes">Static Routes (one per line)</label>
+        <textarea id="static_routes" name="static_routes"></textarea>
+
+        <label for="routing_protocol">Routing Protocol (ospf/eigrp/bgp)</label>
+        <input type="text" id="routing_protocol" name="routing_protocol" value="ospf" />
+
+        <label for="ospf_process">OSPF Process ID</label>
+        <input type="text" id="ospf_process" name="ospf_process" value="1" />
+
+        <label for="bgp_as">BGP AS Number</label>
+        <input type="text" id="bgp_as" name="bgp_as" value="65001" />
+
+        <label for="router_id">Router ID</label>
+        <input type="text" id="router_id" name="router_id" value="10.0.0.254" />
+
+        <label for="passive_interfaces">Passive Interfaces</label>
+        <input type="text" id="passive_interfaces" name="passive_interfaces" value="GigabitEthernet0/0/1" />
+
+        <h2>5. Network Services</h2>
+        <label for="dns1">DNS Server 1</label>
+        <input type="text" id="dns1" name="dns1" value="8.8.8.8" />
+        <label for="dns2">DNS Server 2</label>
+        <input type="text" id="dns2" name="dns2" value="8.8.4.4" />
+
+        <label for="ntp1">NTP Server 1</label>
+        <input type="text" id="ntp1" name="ntp1" value="192.168.1.10" />
+        <label for="ntp2">NTP Server 2</label>
+        <input type="text" id="ntp2" name="ntp2" value="192.168.1.11" />
+
+        <label for="dhcp_excluded">DHCP Excluded Addresses</label>
+        <input type="text" id="dhcp_excluded" name="dhcp_excluded" value="10.0.0.1 10.0.0.10" />
+
+        <label for="dhcp_network">DHCP Network and Mask</label>
+        <input type="text" id="dhcp_network" name="dhcp_network" value="10.0.0.0 255.255.255.0" />
+
+        <label for="dhcp_default_router">DHCP Default Router</label>
+        <input type="text" id="dhcp_default_router" name="dhcp_default_router" value="10.0.0.1" />
+
+        <label for="dhcp_dns">DHCP DNS Server</label>
+        <input type="text" id="dhcp_dns" name="dhcp_dns" value="8.8.8.8" />
+
+        <label for="nat_inside">NAT Inside Interface</label>
+        <input type="text" id="nat_inside" name="nat_inside" value="GigabitEthernet0/0/1" />
+
+        <label for="nat_outside">NAT Outside Interface</label>
+        <input type="text" id="nat_outside" name="nat_outside" value="GigabitEthernet0/0/0" />
+
+        <label for="acl_nat">NAT ACL Number</label>
+        <input type="text" id="acl_nat" name="acl_nat" value="101" />
+
+        <label for="acl_nat_network">NAT ACL Network</label>
+        <input type="text" id="acl_nat_network" name="acl_nat_network" value="10.0.0.0 0.0.0.255" />
 
         <button type="submit">Generate Config</button>
       </form>

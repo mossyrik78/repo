@@ -15,6 +15,15 @@
     <div class="wrapper">
       <h1>Generated Router Config</h1>
       <pre>{{ config_text }}</pre>
+
+      <h2>6. Verification Checklist (Post-Config)</h2>
+      <ul>
+        <li>[ ] show ip interface brief (Status up/up)</li>
+        <li>[ ] show ip route (Routes are present)</li>
+        <li>[ ] ping 8.8.8.8 / internal gateway</li>
+        <li>[ ] copy run start</li>
+      </ul>
+
       <a href="{{ url_for('index') }}">Back</a>
     </div>
   </body>
