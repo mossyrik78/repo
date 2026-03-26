@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Router Config Builder</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      label { display: block; margin-top: 8px; }
+      input { width: 100%; max-width: 400px; padding: 8px; margin-top: 4px; }
+      button { margin-top: 12px; padding: 10px 14px; }
+      .wrapper { max-width: 560px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Router Config Builder</h1>
+      <form method="post">
+        <label for="hostname">Hostname</label>
+        <input type="text" id="hostname" name="hostname" required />
+
+        <label for="mgmt_ip">Management IP</label>
+        <input type="text" id="mgmt_ip" name="mgmt_ip" required placeholder="e.g. 10.0.0.10" />
+
+        <label for="gateway">Default Gateway</label>
+        <input type="text" id="gateway" name="gateway" required placeholder="e.g. 10.0.0.1" />
+
+        <button type="submit">Generate Config</button>
+      </form>
+    </div>
+  </body>
+</html>

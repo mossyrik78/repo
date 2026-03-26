@@ -1,0 +1,10 @@
+devices:
+  - host: 10.0.0.10
+    username: ssh_user
+    password: ssh_pass
+    secret: secret_pass
+    device_type: cisco_ios
+    template_vars:
+      hostname: SW1
+      mgmt_ip: 10.0.0.10
+      gateway: 10.0.0.1
